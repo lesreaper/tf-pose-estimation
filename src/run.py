@@ -51,7 +51,7 @@ if __name__ == '__main__':
     sys.exit(0)
 
     logger.info('3d lifting initialization.')
-    poseLifting = Prob3dPose('./src/lifting/models/prob_model_params.mat')
+    poseLifting = Prob3dPose('./lifting/models/prob_model_params.mat')
 
     image_h, image_w = image.shape[:2]
     standard_w = 640

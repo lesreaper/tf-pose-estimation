@@ -286,13 +286,14 @@ class TfPoseEstimator:
         return npimg_q
 
     @staticmethod
-    def draw_humans(npimg, humans, no_bkgrd=False, imgcopy=False):
+    def draw_humans(npimg, humans, noback=False, imgcopy=False):
 
         if imgcopy:
             npimg = np.copy(npimg)
+
         image_h, image_w = npimg.shape[:2]
 
-        if no_bkgrd:
+        if noback:
             npimg = np.zeros([image_h, image_w, 3], dtype=np.uint8)
 
         centers = {}
@@ -314,8 +315,6 @@ class TfPoseEstimator:
 
                 npimg = cv2.line(npimg, centers[pair[0]], centers[pair[1]], common.CocoColors[pair_order], 3)
 
-        print(1, npimg.shape)
-        cv2.imwrite('../../Desktop/sample.jpg', npimg)
         return npimg
 
     def inference(self, npimg):
