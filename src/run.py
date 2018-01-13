@@ -26,6 +26,8 @@ if __name__ == '__main__':
     parser.add_argument('--image', type=str, default='./images/apink2.jpg')
     # parser.add_argument('--model', type=str, default='mobilenet_320x240', help='cmu / mobilenet_320x240')
     parser.add_argument('--model', type=str, default='mobilenet_thin_432x368', help='cmu_640x480 / cmu_640x360 / mobilenet_thin_432x368')
+    parser.add_argument('--background', type=str, default=False, help='whether to do background only')
+
     args = parser.parse_args()
 
     w, h = model_wh(args.model)
@@ -40,8 +42,9 @@ if __name__ == '__main__':
     logger.info('inference image: %s in %.4f seconds.' % (args.image, elapsed))
 
     image = cv2.imread(args.image, cv2.IMREAD_COLOR)
-    image = TfPoseEstimator.draw_humans(image, humans, imgcopy=False)
+    image = TfPoseEstimator.draw_humans(image, humans, args.background, imgcopy=False)
     cv2.imshow('tf-pose-estimation result', image)
+    cv2.imwrite('../../Desktop/sample2.jpg', image)
     cv2.waitKey()
 
     import sys
